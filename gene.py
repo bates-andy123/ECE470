@@ -1,4 +1,7 @@
+import allel
+
 class Gene():
     func = None
 
-    pass
+    def __init__(self):
+        func = allel.get_func()

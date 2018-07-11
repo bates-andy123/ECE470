@@ -17,10 +17,16 @@ class Data():
             current_row = None
             for row in file_object:
                 if count % 32 == 0:
-                    current_row = self.data[str(row)] = []
+                    current_row = self.data[str(row[0])] = []
                 else:
                     current_row.append(row[0].split(','))
                 count += 1
-            
+
     def print_raw_data(self):
         print self.data
+
+    def get_fg2_pct(self):
+        result = {}
+        for team in self.data:
+            result[team] = float(self.data[team][4][1])
+        return result
