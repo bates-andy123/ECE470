@@ -540,7 +540,7 @@ BRACKET = {
   'temple',
   'villanova',
   'north-carolina-asheville'
-  ]}
+  ]} 
 
 RESULT = {
     2010: [['kansas',
