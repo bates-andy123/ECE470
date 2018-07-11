@@ -1,6 +1,7 @@
 import data
 import result
 import score_calc
+from chromsome import Chromsome
 
 _2010 = data.Data("./dataset/2010.csv")
 
