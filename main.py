@@ -1,4 +1,5 @@
 import data
+import result
 
 _2010 = data.Data("./dataset/2010.csv")
 
