@@ -10,7 +10,7 @@ class Data():
             self.import_year(csv_fd)
 
     def import_year(self, csv_fd):
-        with open(csv_fd, 'rb') as csvfile:
+        with open(csv_fd) as csvfile:
             file_object = csv.reader(csvfile, delimiter=' ', quotechar='|')
             #The CSV is a file in memory, save it to a 2-d list
             count = 0
@@ -23,7 +23,7 @@ class Data():
                 count += 1
 
     def print_raw_data(self):
-        print self.data
+        print(self.data)
 
     def get_keys(self):
         return self.data.keys()
@@ -101,4 +101,12 @@ class Data():
         
         self.normalize(results)
         
+        return results
+
+    def get_data(self, row, column, norm=True):
+        results = {}
+        for team in self.data:
+            results[team] = float(self.data[team][row][column])
+        if norm:
+            self.normalize(results)
         return results

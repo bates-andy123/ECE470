@@ -3,60 +3,45 @@ import scipy.io as sio
 import numpy as np
 import csv
 
-def append_data(data, results):
-    for key in results:
-        results[key].append(data[key])
-
-f = open("descripition.txt", 'w')
-f.write("name\n")
-
+results = {}
+row_names = []
 
 _2010 = data.Data("./dataset/2010.csv")
-
-results = {}
 keys = _2010.get_keys()
+results["Team"] = []
 for key in keys:
     results[key] = []
 
-y = _2010.get_fg2_pct()
-append_data(y, results)
-f.write("2 Pt Field Goal Percent\r\n")
 
-y = _2010.get_fg3_pct()
-append_data(y, results)
-f.write("3 Pt Field Goal Percent\n")
+def append_data(data, results, name):
+    for key in results:
+        if key == "Team":
+            results[key].append(name)
+        else:
+            results[key].append(data[key])
 
-y = _2010.get_fg_pct()
-append_data(y, results)
-f.write("Total Field Goal Percent\n")
+def add_new_field(name, data, row, column):
+    global results, row_names
+    y = data.get_data(row, column)
+    append_data(y, results, name)
+    row_names.append(name)
 
-y = _2010.get_orb_pct()
-append_data(y, results)
-f.write("Offensive Rebounds Percent\n")
+add_new_field("2 Pt Field Goal Percent", _2010, 3 ,1)
+add_new_field("3 Pt Field Goal Percent", _2010, 5 ,1)
+add_new_field("Total Field Goal Percent", _2010, 1 ,1)
+add_new_field("Offensive Rebounds Percent", _2010, 10 ,1)
+add_new_field("Steal Percent", _2010, 13 ,1)
+add_new_field("Block Percent", _2010, 14 ,1)
 
-y = _2010.get_stl_pct()
-append_data(y, results)
-f.write("Steal Percent\n")
 
-y = _2010.get_blk_pct()
-append_data(y, results)
-f.write("Block Percent\n")
+with open("data.csv", "w") as outfile:
+   results["Team"] = row_names
 
-with open("data.csv", "wb") as outfile:
    writer = csv.writer(outfile)
    writer.writerow(results.keys())
    writer.writerows(zip(*results.values()))
 
+f = open("descripition.txt", 'w')
+for r in row_names:
+    f.write(r + '\n')
 f.close()
-"""
-fg2 = _2010.get_fg2_pct()
-
-
-
-x = np.linspace(0, 2 * np.pi, 100)
-y = np.cos(x)
-
-print len(y)
-
-sio.savemat('test.mat', dict(x=np.array(x1.values())))
-"""
