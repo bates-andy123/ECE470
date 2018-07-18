@@ -1,7 +1,0 @@
-name
-2 Pt Field Goal Percent
-3 Pt Field Goal Percent
-Total Field Goal Percent
-Offensive Rebounds Percent
-Steal Percent
-Block Percent

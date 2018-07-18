@@ -1,15 +1,19 @@
 import csv
+import random
 
 class Data():
 
     #Public members
-    data = {}
     
     def __init__(self, csv_fd = None):
         if(csv_fd != None):
             self.import_year(csv_fd)
 
+    def __del__(self):
+        pass
+
     def import_year(self, csv_fd):
+        self.data = {}
         with open(csv_fd) as csvfile:
             file_object = csv.reader(csvfile, delimiter=' ', quotechar='|')
             #The CSV is a file in memory, save it to a 2-d list
@@ -38,75 +42,16 @@ class Data():
 
         return results
 
-    def get_fg2_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][4][1])
-        
-        self.normalize(results)
-        
-        return results
-
-
-    def get_fg2_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][3][1])
-        
-        self.normalize(results)
-        
-        return results
-
-    def get_fg3_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][5][1])
-        
-        self.normalize(results)
-        
-        return results
-
-    def get_fg_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][1][1])
-        
-        self.normalize(results)
-        
-        return results
-
-
-    def get_orb_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][10][1])
-        
-        self.normalize(results)
-        
-        return results
-
-    def get_stl_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][13][1])
-        
-        self.normalize(results)
-        
-        return results
-
-    def get_blk_pct(self):
-        results = {}
-        for team in self.data:
-            results[team] = float(self.data[team][14][1])
-        
-        self.normalize(results)
-        
-        return results
-
     def get_data(self, row, column, norm=True):
         results = {}
         for team in self.data:
             results[team] = float(self.data[team][row][column])
         if norm:
             self.normalize(results)
+        return results
+
+    def get_random_data(self):
+        results = {}
+        for team in self.data:
+            results[team] = random.random()
         return results
