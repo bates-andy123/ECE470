@@ -1,4 +1,4 @@
-gens = 10
+gens = 50
 
 
  options = gaoptimset(@ga);
@@ -14,13 +14,10 @@ gens = 10
                       'CreationFcn', {@PopFunction});
                      
 
-%[x,fval,exitflag,output,population,scores]=ga(@fitness,25,options)
-x = ones(1, 25);
+[x,fval,exitflag,output,population,scores]=ga(@fitness,25,options)
 
 idx = 1;
-idx_list = [];
-
-x_list = [];
+idx_list = []
 
 fits_2016 = [];
 percents_2016 = [];
@@ -30,11 +27,9 @@ fits_2015 = [];
 percents_2015 = [];
 results_2015 = [];
 
-for i = 1:50
+for i = 1:2
     idx_list = [idx_list; idx];
     idx = idx + 1;
-    
-    x_list = [x_list; x];
     
     [fit, percent, result] = fitness(x, 2016);
     fits_2016 = [fits_2016; fit];
@@ -60,8 +55,8 @@ for i = 1:50
     [x,fval,exitflag,output,population,scores]=ga(@fitness,25,options)
 end
        
-csvwrite("2016_F1.csv", [idx_list fits_2016 percents_2016 x_list]);
+csvwrite("2016_F1.csv", [idx_list fits_2016 percents_2016]);
 csvwrite("2016_Results.csv", [results_2016]);
 
-csvwrite("2015_F1.csv", [idx_list fits_2015 percents_2015 x_list]);
+csvwrite("2015_F1.csv", [idx_list fits_2015 percents_2015]);
 csvwrite("2015_Results.csv", [results_2015]);

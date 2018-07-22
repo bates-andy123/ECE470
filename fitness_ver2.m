@@ -63,5 +63,5 @@ end
 if nargin > 2
    percents
 end
-fit = 1289/total;
+fit = 1289/(total)^2;
 end
