@@ -76,21 +76,25 @@ for year in years:
 	generate_random_row("Random 4", year_obj)
 	generate_random_row("Random 5", year_obj)
 
-		
+	results2 = {}
+	results2["Team"] = results["Team"]
 	
-	with open("./our_data/training/" + year + "_data.csv", "w") as outfile:
-		"""
-		for idx in results:	
-			if idx == "Team":
+	#idx = 1
+	for idx in range(1, 65):
+		for key in results:
+			if key == 'Team':
 				pass
 			else:
-				print (results["Team"])
-				results["Team"]["Number"].append(lookup[idx])
-		"""
+				if int(results[key][0]) == idx:
+					results2[key] = results[key]
+	
+	#print(results2)
+	
+	with open("./our_data/training/" + year + "_data.csv", "w") as outfile:
 
 		writer = csv.writer(outfile, delimiter=',', lineterminator='\n')
-		writer.writerow(results.keys())
-		writer.writerows(zip(*results.values()))
+		writer.writerow(results2.keys())
+		writer.writerows(zip(*results2.values()))
 
 	f = open("./our_data/training/" + year + "_descripition.txt", 'w')
 	for r in row_names:
