@@ -88,7 +88,7 @@ BRACKET = {
 
 }
 
-BRACKET = {
+BRACKET_ORIG = {
 
 2010: [ 'kansas',
   'lehigh',

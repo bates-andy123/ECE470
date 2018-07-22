@@ -50,8 +50,10 @@ class Data():
             self.normalize(results)
         return results
 
-    def get_random_data(self):
+    def get_random_data(self, norm=True):
         results = {}
         for team in self.data:
             results[team] = random.random()
+        if norm:
+            self.normalize(results)
         return results
